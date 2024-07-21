@@ -5,36 +5,19 @@ services:
     build: ./backend
     ports:
       - "5000:5000"
-    environment:
-      - NODE_ENV=production
-    volumes:
-      - ./backend:/usr/src/app
+    env_file:
+      - ./backend/.env
     depends_on:
-      - db
+      - frontend
 
   frontend:
-    build: ./frontend/src
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
-      - "80:80"
-    environment:
-      - NODE_ENV=production
-    volumes:
-      - ./frontend/src:/usr/src/app
-    depends_on:
-      - backend
-
-  db:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: your_root_password
-      MYSQL_DATABASE: your_database_name
-      MYSQL_USER: your_database_user
-      MYSQL_PASSWORD: your_database_password
-    ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
+      - "3000:3000"
+    env_file:
+      - ./frontend/src/.env
 
 volumes:
-  db_data:
+  mysql-data:
