@@ -29,7 +29,7 @@ jobs:
 
     - name: Build and push frontend
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend:latest ./frontend
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend:latest -f ./frontend/src/Dockerfile ./frontend/src
         docker push ${{ secrets.DOCKER_USERNAME }}/frontend:latest
 
     - name: SSH to Server and Deploy
