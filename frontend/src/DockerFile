@@ -1,25 +1,24 @@
-# Use a base image
+# Use the official Node.js image.
 FROM node:14
 
-# Set the working directory
+# Create and change to the app directory.
 WORKDIR /usr/src/app
 
-# Copy package.json and install dependencies
-COPY package*.json ./
-RUN npm install
+# Copy application dependency manifests to the container image.
+COPY src/package*.json ./
 
-# Copy the rest of the application code
-COPY . .
+# Install production dependencies.
+RUN npm install --production
 
-# Build the frontend
+# Copy local code to the container image.
+COPY src .
+
+# Copy the .env file if needed for build
+COPY src/.env .env
+
+# Build the app
 RUN npm run build
 
-# Use a base image for serving the built frontend
-FROM nginx:alpine
-COPY --from=0 /usr/src/app/build /usr/share/nginx/html
-
-# Expose the port the app runs on
-EXPOSE 80
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Serve the app
+RUN npm install -g serve
+CMD ["serve", "-s", "build"]
