@@ -2,22 +2,18 @@ version: '3.8'
 
 services:
   backend:
-    build: ./backend
+    image: ${{ secrets.DOCKER_USERNAME }}/backend:latest
     ports:
       - "5000:5000"
     env_file:
       - ./backend/.env
-    depends_on:
-      - frontend
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: ${{ secrets.DOCKER_USERNAME }}/frontend:latest
     ports:
       - "3000:3000"
     env_file:
-      - ./frontend/src/.env
+      - ./frontend/.env
 
 volumes:
   mysql-data:
