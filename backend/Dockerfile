@@ -13,5 +13,8 @@ RUN npm install --production
 # Copy local code to the container image.
 COPY . .
 
+# Copy the .env file to the container
+COPY .env .env
+
 # Run the web service on container startup.
 CMD [ "npm", "start" ]
