@@ -17,8 +17,6 @@ services:
     image: mhunain5037/frontend:latest
     ports:
       - "3000:3000"
-    environment:
-      # Add any necessary frontend environment variables here
 
 volumes:
   mysql-data:
