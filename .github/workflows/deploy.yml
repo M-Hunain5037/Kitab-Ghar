@@ -24,7 +24,14 @@ jobs:
 
     - name: Build and push backend
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/backend:latest ./backend
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/backend:latest \
+          --build-arg DB_HOST=${{ secrets.DB_HOST }} \
+          --build-arg DB_USER=${{ secrets.DB_USER }} \
+          --build-arg DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+          --build-arg DB_NAME=${{ secrets.DB_NAME }} \
+          --build-arg PORT=${{ secrets.PORT }} \
+          --build-arg ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }} \
+          ./backend
         docker push ${{ secrets.DOCKER_USERNAME }}/backend:latest
 
     - name: Build and push frontend
@@ -42,4 +49,3 @@ jobs:
           cd /path/to/your/project
           docker-compose pull
           docker-compose up -d
-
