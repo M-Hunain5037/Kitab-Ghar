@@ -2,19 +2,19 @@ version: '3.8'
 
 services:
   backend:
-    image: ${{ secrets.DOCKER_USERNAME }}/backend:latest
+    image: mhunain5037/backend:latest
     ports:
       - "5000:5000"
     environment:
-      - DB_HOST=${{ secrets.DB_HOST }}
-      - DB_USER=${{ secrets.DB_USER }}
-      - DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-      - DB_NAME=${{ secrets.DB_NAME }}
-      - PORT=${{ secrets.PORT }}
-      - ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }}
+      - DB_HOST=localhost
+      - DB_USER=root
+      - DB_PASSWORD=51036535
+      - DB_NAME=credentials
+      - PORT=5000
+      - ACCESS_TOKEN_SECRET=9a4adf5883d7eff5eaf7f259edb2191b36b66ef64a916238ffd9257a842c375713010c53a8bde0ed9fb1adbd4b26bf4ab10c484a62d62af1180fcf7d2d7dbad0
 
   frontend:
-    image: ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+    image: mhunain5037/frontend:latest
     ports:
       - "3000:3000"
     environment:
