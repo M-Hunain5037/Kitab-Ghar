@@ -42,3 +42,4 @@ jobs:
           cd /path/to/your/project
           docker-compose pull
           docker-compose up -d
+
