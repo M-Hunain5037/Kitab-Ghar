@@ -93,7 +93,7 @@ const ViewApprovedBooks = () => {
               <td>{book.id}</td>
               <td>{book.title}</td>
               <td>{book.authors}</td>
-              <td>{book.user_name}</td> {/* Ensure this matches the backend response */}
+              <td>{book.uploaded_by}</td> {/* Ensure this matches the backend response */}
               <td>{book.status}</td>
               <td>
                 <Button onClick={() => handleEdit(book)}>Edit</Button>
